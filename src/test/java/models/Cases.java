@@ -6,13 +6,15 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Milestone {
+public class Cases {
     @Expose
     private int id;
     @Expose
-    private String name;
+    private String title;
     @Expose
-    private String description;
+    private String case_ids;
     @Expose
-    private boolean is_completed;
+    private int type_id;
+    @Expose
+    private int priority_id;
 }

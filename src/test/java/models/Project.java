@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 @Builder
 public class Project {
+    @Expose
+    private int id;
 @Expose
     private String name;
     @Expose

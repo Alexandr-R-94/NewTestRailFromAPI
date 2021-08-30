@@ -4,19 +4,15 @@ import adapters.ProjectsAdapter;
 import baseEntities.BaseApiTest;
 import com.google.gson.GsonBuilder;
 import endpoints.ProjectEndpoints;
-import groovyjarjarantlr4.v4.runtime.Dependents;
 import io.restassured.mapper.ObjectMapperType;
-import io.restassured.response.Response;
 import models.Project;
 import models.ProjectTypes;
-import models.ProjectsList;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +35,11 @@ public class TestRailApiTest extends BaseApiTest {
                 .log().body()
                 .statusCode(HttpStatus.SC_OK);
     }
+
     @Test
     public void getAllProjectsAdapterTest() {
 
-        List<Project> projectList = new ProjectsAdapter().get();
+        List<Project> projectList = new ProjectsAdapter().getProjects();
 
         System.out.println(projectList.get(0));
 
@@ -65,7 +62,7 @@ public class TestRailApiTest extends BaseApiTest {
     public void getAdaptorProjectDetailsTest() {
         int projectId = 22;
 
-        Project actualProject = new ProjectsAdapter().get(projectId);
+        Project actualProject = new ProjectsAdapter().getProject(projectId);
 
         System.out.println(actualProject);
 
@@ -116,7 +113,7 @@ public class TestRailApiTest extends BaseApiTest {
        Project expectedProject = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
                .fromJson(new FileReader("src/test/resources/expectedProject.json"), Project.class);
 
-       Project actualProject = new ProjectsAdapter().get(22);
+       Project actualProject = new ProjectsAdapter().getProject(22);
 
        Assert.assertEquals(expectedProject, actualProject);
     }
