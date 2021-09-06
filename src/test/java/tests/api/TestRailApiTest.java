@@ -47,20 +47,20 @@ public class TestRailApiTest extends BaseApiTest {
 
     @Test
     public void getProjectDetailsTest() {
-        int projectId = 2;
+        int projectId = 96;
 
         given()
                 .when()
                 .get(String.format(ProjectEndpoints.GET_PROJECT, projectId))
                 .then()
                 .log().body()
-                .body("name", is("Test1"))
+                .body("name", is("Project for milestones and cases(section)"))
                 .body("is_completed", equalTo(false))
                 .statusCode(HttpStatus.SC_OK);
     }
     @Test
     public void getAdaptorProjectDetailsTest() {
-        int projectId = 22;
+        int projectId = 96;
 
         Project actualProject = new ProjectsAdapter().getProject(projectId);
 
@@ -113,7 +113,7 @@ public class TestRailApiTest extends BaseApiTest {
        Project expectedProject = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
                .fromJson(new FileReader("src/test/resources/expectedProject.json"), Project.class);
 
-       Project actualProject = new ProjectsAdapter().getProject(22);
+       Project actualProject = new ProjectsAdapter().getProject(96);
 
        Assert.assertEquals(expectedProject, actualProject);
     }
